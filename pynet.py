@@ -39,7 +39,9 @@ def latest_virtualenv():
     url = 'https://pypi.python.org/pypi/virtualenv/json'
     response = urllib2.urlopen(url)
     listing = json.load(response)
-    for package in listing[sorted(listing.keys())[-1]]:
+    latest = sorted(listing['releases'].keys())[-1]
+    packages = listing['releases'][latest]
+    for package in packages:
         if package['filename'].endswith('tar.gz'):
             return package
     raise TarGzPackageNotFoundError
