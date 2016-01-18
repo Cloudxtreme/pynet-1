@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "pynet bash bootstrap script"
+echo "args: $@"
