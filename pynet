@@ -1,12 +1,20 @@
 #!/bin/bash
 
-echo "pynet bash bootstrap script"
-echo "name: $0"
-echo "args: $@"
-
+echo "pynet: bash bootstrap script"
+SCRIPT_NAME=$0
+SCRIPT_ARGS="$@"
 PYNET_DIR=`realpath ${PYNET_DIR:-~/.pynet}`
 PYNET_SRC="${PYNET_DIR}/src"
+PYNET_URL="https://github.com/pynet/pynet"
 VE_URL="https://github.com/pypa/virtualenv"
+
+if [ $SCRIPT_NAME == "bash" ]; then
+    mkdir -p $PYNET_DIR
+    cd $PYNET_DIR
+    wget "${PYNET_URL}/raw/master/pynet*"
+    exec ./pynet "$SCRIPT_ARGS"
+    exit $?
+fi
 
 if [ -z "$VE_TAG" ]; then
     VE_TAG=`git ls-remote $VE_URL | \
