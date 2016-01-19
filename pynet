@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "pynet: bash bootstrap script"
 SCRIPT_NAME=$0
 SCRIPT_ARGS="$@"
 PYNET_DIR=`realpath ${PYNET_DIR:-~/.pynet}`
@@ -17,6 +16,8 @@ if [ $SCRIPT_NAME == "bash" ]; then
     exec ./pynet "$SCRIPT_ARGS"
     exit $?
 fi
+
+echo "pynet: bash bootstrap script"
 
 if [ -z "$VE_TAG" ]; then
     VE_TAG=`git ls-remote $VE_URL | \
