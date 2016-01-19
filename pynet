@@ -11,7 +11,8 @@ VE_URL="https://github.com/pypa/virtualenv"
 if [ $SCRIPT_NAME == "bash" ]; then
     mkdir -p $PYNET_DIR
     cd $PYNET_DIR
-    wget "${PYNET_URL}/raw/master/pynet*"
+    wget "${PYNET_URL}/raw/master/pynet"
+    wget "${PYNET_URL}/raw/master/pynet.py"
     exec ./pynet "$SCRIPT_ARGS"
     exit $?
 fi
