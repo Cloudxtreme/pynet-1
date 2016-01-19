@@ -13,6 +13,7 @@ if [ $SCRIPT_NAME == "bash" ]; then
     cd $PYNET_DIR
     wget "${PYNET_URL}/raw/master/pynet"
     wget "${PYNET_URL}/raw/master/pynet.py"
+    chmod 755 ./pynet
     exec ./pynet "$SCRIPT_ARGS"
     exit $?
 fi
