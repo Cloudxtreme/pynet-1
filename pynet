@@ -2,3 +2,17 @@
 
 echo "pynet bash bootstrap script"
 echo "args: $@"
+
+PYNET_DIR=`realpath ${PYNET_DIR:-~/.pynet}`
+PYNET_SRC="${PYNET_DIR}/src"
+VE_URL="https://github.com/pypa/virtualenv"
+
+if [ -z "$VE_TAG" ]; then
+    VE_TAG=`git ls-remote $VE_URL | \
+        cut -f2 | grep refs/tags | grep -v { | sort --version-sort | tail -1`
+fi
+
+mkdir -p $PYNET_SRC
+VE_REPOSPEC="${VE_URL}@${VE_TAG}"
+VE_PATH=`python clone.py --versioning --clonepath $PYNET_SRC $VE_REPOSPEC`
+(cd $PYNET_DIR && rm -f virtualenv && ln -s $VE_PATH virtualenv)
